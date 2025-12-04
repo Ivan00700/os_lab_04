@@ -1,4 +1,3 @@
-// program2.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <dlfcn.h> // Заголовок для работы с динамическими библиотеками
@@ -10,21 +9,23 @@ typedef int* (*Sort_Func)(int*, int);
 const char* LIB_NAMES[] = {"./libimpl1.so", "./libimpl2.so"};
 
 int main() {
-    void* lib_handle = NULL;
+    void* lib_handle = NULL; 
+    // непрозрачный указатель, то есть адрес библиотеки, если надо что то найти или закрыть ее - "показываем" этот "жетончик"
+    // т.е. адрес структуры описания библиотеки
     GCF_Func gcf_func = NULL;
     Sort_Func sort_func = NULL;
     int current_lib = 0;
 
     // Загружаем первую библиотеку по умолчанию
-    lib_handle = dlopen(LIB_NAMES[current_lib], RTLD_LAZY);
+    lib_handle = dlopen(LIB_NAMES[current_lib], RTLD_LAZY); // RTLD_LAZY - ленивая загрузка, значит что ОС не проверяет все функции бибилиотеки
     if (!lib_handle) {
         fprintf(stderr, "Error loading library: %s\n", dlerror());
         return 1;
     }
     
     // Получаем адреса функций
-    gcf_func = (GCF_Func)dlsym(lib_handle, "GCF");
-    sort_func = (Sort_Func)dlsym(lib_handle, "Sort");
+    gcf_func = (GCF_Func)dlsym(lib_handle, "GCF"); // !!!dlsym возвращает адрес начала машинного кода этой функции!!!
+    sort_func = (Sort_Func)dlsym(lib_handle, "Sort"); // dlsym возвращает адрес начала машинного кода этой функции
 
     if (!gcf_func || !sort_func) {
         fprintf(stderr, "Error loading symbols: %s\n", dlerror());
