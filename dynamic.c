@@ -17,6 +17,7 @@ int main() {
     int current_lib = 0;
 
     // Загружаем первую библиотеку по умолчанию
+    // дскрптр загруженной библиотеки
     lib_handle = dlopen(LIB_NAMES[current_lib], RTLD_LAZY); // RTLD_LAZY - ленивая загрузка, значит что ОС не проверяет все функции бибилиотеки
     if (!lib_handle) {
         fprintf(stderr, "Error loading library: %s\n", dlerror());
@@ -32,7 +33,7 @@ int main() {
         return 1;
     }
 
-    printf("Program #2 (Dynamic Loading). Current lib: %s\n", LIB_NAMES[current_lib]);
+    printf("Dynamic #2 (Dynamic Loading). Current lib: %s\n", LIB_NAMES[current_lib]);
 
     int command;
     while (scanf("%d", &command) != EOF) {

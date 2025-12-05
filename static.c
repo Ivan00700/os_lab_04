@@ -24,7 +24,7 @@ int* parse_array(int* size) {
 
 int main() {
     int command;
-    printf("Program #1 (Static Linking)\n");
+    printf("Static #1 (Static Linking)\n");
     printf("Commands:\n 1 A B (GCF)\n 2 arr... (QuickSort)\n");
 
     while (scanf("%d", &command) != EOF) {

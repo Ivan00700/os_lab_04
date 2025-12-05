@@ -12,7 +12,7 @@ int GCF(int A, int B) {
     return 1;
 }
 
-// Вспомогательная функция для QuickSort
+// функция для QuickSort
 void quickSortInternal(int* array, int low, int high) {
     if (low < high) {
         int pivot = array[(low + high) / 2];
