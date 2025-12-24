@@ -25,8 +25,8 @@ int main() {
     }
     
     // Получаем адреса функций
-    gcf_func = (GCF_Func)dlsym(lib_handle, "GCF"); // !!!dlsym возвращает адрес начала машинного кода этой функции!!!
-    sort_func = (Sort_Func)dlsym(lib_handle, "Sort"); // dlsym возвращает адрес начала машинного кода этой функции
+    gcf_func = (GCF_Func)dlsym(lib_handle, "GCF");
+    sort_func = (Sort_Func)dlsym(lib_handle, "Sort");
 
     if (!gcf_func || !sort_func) {
         fprintf(stderr, "Error loading symbols: %s\n", dlerror());
@@ -59,7 +59,6 @@ int main() {
             printf("GCF: %d\n", gcf_func(a, b));
         }
         else if (command == 2) {
-            // Парсинг массива
             int capacity = 10, size = 0, val;
             int* arr = malloc(capacity * sizeof(int));
             char ch;
